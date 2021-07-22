@@ -24,6 +24,8 @@ Thanks for testing
 #include <EEPROM.h>
 #include "ubitx.h"
 
+#ifdef UBITX_WSPR_ENABLE
+
 //begin of test
 byte WsprToneCode[164];
 
@@ -196,3 +198,5 @@ void SendWSPRManage()
   } //end of while
 }
 
+
+#endif /* UBITX_WSPR_ENABLE */

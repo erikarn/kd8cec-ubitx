@@ -23,7 +23,7 @@
 // Compile Option
 //==============================================================================
 //Ubitx Board Version
-#define UBITX_BOARD_VERSION 2           //v1 ~ v4 : 4, v5: 5
+#define UBITX_BOARD_VERSION 5          //v1 ~ v4 : 4, v5: 5
 
 //Depending on the type of LCD mounted on the uBITX, uncomment one of the options below.
 //You must select only one.
@@ -39,7 +39,7 @@
 #define I2C_LCD_SECOND_ADDRESS_DEFAULT  0x3F     //0x27  //only using Dual LCD Mode
 
 //Select betwen Analog S-Meter and DSP (I2C) Meter
-#define USE_I2CSMETER
+//#define USE_I2CSMETER
 
 #define EXTEND_KEY_GROUP1               //MODE, BAND(-), BAND(+), STEP
 //#define EXTEND_KEY_GROUP2             //Numeric (0~9), Point(.), Enter  //Not supported in Version 1.0x
@@ -296,7 +296,9 @@ extern byte I2C_LCD_SECOND_ADDRESS;     //only using Dual LCD Mode
 extern uint8_t SI5351BX_ADDR;     //change typical -> variable at Version 1.097, address read from eeprom, default value is 0x60
                                   //EEProm Address : 63
 extern unsigned long frequency;
+#ifdef UBITX_WSPR_ENABLE
 extern byte WsprMSGCount;
+#endif
 extern byte sMeterLevels[9];
 extern int currentSMeter;         //ADC Value for S.Meter
 extern byte scaledSMeter;         //Calculated S.Meter Level
@@ -317,14 +319,18 @@ extern void si5351bx_init(void);
 extern void si5351bx_setfreq(uint8_t clknum, uint32_t fout);
 extern void si5351_set_calibration(int32_t cal);
 extern void initOscillators(void);
+#ifdef UBITX_WSPR_ENABLE
 extern void Set_WSPR_Param(void);
+#endif
 extern void TXSubFreq(unsigned long P2);
 
 extern void startTx(byte txMode, byte isDisplayUpdate);
 extern void stopTx(void);
 extern void setTXFilters(unsigned long freq);
 
+#ifdef UBITX_WSPR_ENABLE
 extern void SendWSPRManage(void);
+#endif
 extern char byteToChar(byte srcByte);
 extern void DisplayCallsign(byte callSignLength);
 extern void DisplayVersionInfo(const char* fwVersionInfo);

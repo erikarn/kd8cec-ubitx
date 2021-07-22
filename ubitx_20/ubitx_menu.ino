@@ -527,6 +527,7 @@ void menuCWAutoKey(int btn){
 
 //Standalone WSPR Beacone
 void menuWSPRSend(int btn){
+#ifdef UBITX_WSPR_ENABLE
   if (!btn){
      printLineF2(F("WSPR Beacon"));
      return;
@@ -542,6 +543,12 @@ void menuWSPRSend(int btn){
 
   SendWSPRManage();
   menuClearExit(1000);
+#else
+  if (!btn){
+     printLineF2(F("WSPR Beacon (DISABLED)"));
+     return;
+  }
+#endif
 }
 
 //Append by KD8CEC
