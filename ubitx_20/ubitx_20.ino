@@ -547,12 +547,12 @@ void setFrequency(unsigned long f){
  */
 void startTx(byte txMode, byte isDisplayUpdate){
   //Check Hamband only TX //Not found Hamband index by now frequency
-
+#if 0
   // Note - general band transmit above 3.5MHz
   if (frequency < 3500000L) {
     return;
   }
-#if 0
+#else
   if (tuneTXType >= 100 && getIndexHambanBbyFreq(ritOn ? ritTxFrequency :  frequency) == -1) {
     //no message
     return;
